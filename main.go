@@ -3,10 +3,14 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"go-image-uploader/config"
+	"go-image-uploader/models"
 	"go-image-uploader/routes"
 )
 
 func main() {
+	// init in-memory database
+	models.NewUserDB()
+	// init router
 	r := gin.Default()
 	config.LoadEnv()
 
@@ -17,5 +21,8 @@ func main() {
 		})
 	})
 
-	r.Run(":5000")
+	err := r.Run(":5000")
+	if err != nil {
+		panic(err)
+	}
 }

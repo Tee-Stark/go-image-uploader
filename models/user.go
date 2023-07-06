@@ -9,9 +9,11 @@ type User struct {
 
 var users map[int]User
 
-func (u *User) CreateUser() {
-	users = make(map[int]User) // allocate memory to the map
+func NewUserDB() {
+	users = make(map[int]User)
+}
 
+func (u *User) CreateUser() {
 	id := len(users) + 1
 	u.ID = id
 	users[id] = *u
