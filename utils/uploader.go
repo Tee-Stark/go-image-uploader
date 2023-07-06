@@ -4,16 +4,17 @@ import (
 	"context"
 	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
 	"go-image-uploader/config"
-	"os"
+	"mime/multipart"
 )
 
-func UploadToCloudinary(file *os.File, filePath string) (string, error) {
+func UploadToCloudinary(file multipart.File, filePath string) (string, error) {
 	ctx := context.Background()
 	cld, err := config.SetupCloudinary()
 	if err != nil {
 		return "", err
 	}
 
+	// create upload params
 	uploadParams := uploader.UploadParams{
 		PublicID: filePath,
 	}
