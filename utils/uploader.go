@@ -16,7 +16,8 @@ func UploadToCloudinary(file multipart.File, filePath string) (string, error) {
 
 	// create upload params
 	uploadParams := uploader.UploadParams{
-		PublicID: filePath,
+		PublicID:     filePath,
+		ResourceType: "image",
 	}
 
 	result, err := cld.Upload.Upload(ctx, file, uploadParams)
