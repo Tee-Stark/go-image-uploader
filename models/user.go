@@ -13,17 +13,17 @@ func NewUserDB() {
 	users = make(map[int]User)
 }
 
-func (u *User) CreateUser() {
+func CreateUser(u *User) {
 	id := len(users) + 1
 	u.ID = id
 	users[id] = *u
 }
 
-func (u *User) GetUser(id int) User {
+func GetUser(id int) User {
 	return users[id]
 }
 
-func (u *User) UpdateUser(id int, update map[string]string) User {
+func UpdateUser(id int, update map[string]string) User {
 	user := users[id]
 
 	for key, value := range update {

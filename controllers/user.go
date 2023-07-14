@@ -17,7 +17,7 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
-	user.CreateUser()
+	models.CreateUser(&user)
 	c.JSON(http.StatusCreated, user)
 }
 
@@ -25,7 +25,7 @@ func GetUser(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var user models.User
 	userId, _ := strconv.Atoi(id)
-	user = user.GetUser(userId)
+	user = models.GetUser(userId)
 	c.JSON(http.StatusOK, user)
 }
 
@@ -49,12 +49,12 @@ func UploadImage(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	var user models.User
+
 	userId, _ := strconv.Atoi(id)
 	update := map[string]string{
 		"image_url": imageUrl,
 	}
-	updatedUser := user.UpdateUser(userId, update)
+	updatedUser := models.UpdateUser(userId, update)
 	c.JSON(http.StatusOK, gin.H{"data": updatedUser})
 	return
 }
