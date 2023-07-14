@@ -11,6 +11,6 @@ func SetupUserRouter(r *gin.Engine) {
 	{
 		user.POST("/", controllers.CreateUser)
 		user.GET("/:id", controllers.GetUser)
-		user.Use(middlewares.FileUploadMiddleware()).POST("/:id/uploadImage", controllers.UploadImage)
+		user.POST("/:id/uploadImage", middlewares.FileUploadMiddleware(), controllers.UploadImage)
 	}
 }
